@@ -23,6 +23,8 @@
 
 #include <android/hardware/light/2.0/ILight.h>
 #include <android/hardware/light/2.0/types.h>
+#include <vendor/samsung/hardware/light/2.0/ISecLight.h>
+#include <vendor/samsung/hardware/light/2.0/types.h>
 #include <android-base/chrono_utils.h>
 #include <utils/misc.h>
 #include <utils/Log.h>
@@ -40,6 +42,8 @@ using Type       = ::android::hardware::light::V2_0::Type;
 template<typename T>
 using Return     = ::android::hardware::Return<T>;
 
+using ISecLight  = ::vendor::samsung::hardware::light::V2_0::ISecLight;
+using SecType    = ::vendor::samsung::hardware::light::V2_0::SecType;
 static bool sLightSupported = true;
 
 static bool validate(jint light, jint flash, jint brightness) {
@@ -150,6 +154,21 @@ static void setLight_native(
         }
         colorAlpha = (colorAlpha * brightnessLevel) / 0xFF;
         colorARGB = (colorAlpha << 24) + (colorARGB & 0x00FFFFFF);
+    }
+    
+    sp<ISecLight> secHal = ISecLight::getService();
+
+    if(secHal != nullptr) {
+        SecType type = static_cast<SecType>(light);
+        LightState state = constructState(
+                colorARGB, flashMode, onMS, offMS, brightnessMode);
+
+        {
+            android::base::Timer t;
+            Return<Status> ret = secHal->setLightSec(type, state);
+            processReturn(ret, static_cast<Type>(light), state);
+            if (t.duration() > 50ms) ALOGD("Excessive delay setting light");
+        }
     }
 
     Type type = static_cast<Type>(light);
