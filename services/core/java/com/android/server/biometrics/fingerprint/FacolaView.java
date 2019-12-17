@@ -76,16 +76,17 @@ public class FacolaView extends ImageView implements OnTouchListener {
         String[] size = android.os.SystemProperties.get("persist.vendor.sys.fp.fod.size.width_height", "").split(",");
         Slog.d("PHH-Enroll", "FacolaView hello");
         if(size.length == 2 && location.length == 2) {
-            Slog.d("PHH-Enroll", "Got real values");
+            Slog.d("PHH-Enroll", "Got real values from prop");
             mX = Integer.parseInt(location[0]);
             mY = Integer.parseInt(location[1]);
             mW = Integer.parseInt(size[0]);
             mH = Integer.parseInt(size[1]);
         } else {
-            mX = -1;
-            mY = -1;
-            mW = -1;
-            mH = -1;
+            Slog.d("PHH-Enroll", "Got hard-coded values");
+            mX = 450;
+            mY = 1910;
+            mW = 180;
+            mH = 180;
         }
 
         mPaintFingerprint.setAntiAlias(true);
@@ -231,7 +232,7 @@ public class FacolaView extends ImageView implements OnTouchListener {
             if(mXiaomiFingerprint != null) {
                 mXiaomiFingerprint.extCmd(0xa, 0);
             } else if(mGoodixFingerprint != null) {
-                mXiaomiFingerprint.extCmd(10, 0);
+                mGoodixFingerprint.goodixExtendCommand(10, 0);
             }
         } catch(Exception e) {
             Slog.d("PHH-Enroll", "Failed calling xiaomi fp extcmd");
