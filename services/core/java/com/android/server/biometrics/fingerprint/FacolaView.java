@@ -107,10 +107,10 @@ public class FacolaView extends ImageView implements OnTouchListener {
             mW = Integer.parseInt(size[0]);
             mH = Integer.parseInt(size[1]);
         } else {
-            mX = -1;
-            mY = -1;
-            mW = -1;
-            mH = -1;
+            mX = 450;
+            mY = 1910;
+            mW = 180;
+            mH = 180;
         }
 
         int oppoSize = android.os.SystemProperties.getInt("persist.vendor.fingerprint.optical.iconsize", 0);
@@ -370,7 +370,7 @@ public class FacolaView extends ImageView implements OnTouchListener {
             if(mXiaomiFingerprint != null) {
                 mXiaomiFingerprint.extCmd(0xa, 0);
             } else if(mGoodixFingerprint != null) {
-                mXiaomiFingerprint.extCmd(10, 0);
+                mGoodixFingerprint.extCmd(10, 0);
             }
         } catch(Exception e) {
             Slog.d("PHH-Enroll", "Failed calling xiaomi fp extcmd");
