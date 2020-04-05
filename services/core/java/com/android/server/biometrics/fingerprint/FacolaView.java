@@ -370,7 +370,7 @@ public class FacolaView extends ImageView implements OnTouchListener {
             if(mXiaomiFingerprint != null) {
                 mXiaomiFingerprint.extCmd(0xa, 0);
             } else if(mGoodixFingerprint != null) {
-                mGoodixFingerprint.extCmd(10, 0);
+                mGoodixFingerprint.goodixExtendCommand(10, 0);
             }
         } catch(Exception e) {
             Slog.d("PHH-Enroll", "Failed calling xiaomi fp extcmd");
