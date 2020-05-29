@@ -187,7 +187,7 @@
     </string-array>
 
     <!-- Whether or not we should show vendor mismatch message -->
-    <bool name="config_show_vendor_mismatch_message">true</bool>
+    <bool name="config_show_vendor_mismatch_message">false</bool>
 
     <!-- Whether device has screen with higher aspect ratio -->
     <bool name="config_haveHigherAspectRatioScreen">false</bool>
