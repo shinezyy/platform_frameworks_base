@@ -37,9 +37,6 @@
         aod,adb_network,caffeine,compass,cpuinfo,fpsinfo,gaming,heads_up,hwkeys,livedisplay,music,navbar,reading_mode,reboot,screenrecord,screenshot,screenstabilization,smartpixels,sound,soundsearch,dataswitch,sync,usb_tether,vpn
     </string>
 
-    <!-- Color of the FOD view -->
-    <color name="config_fodColor">#00ff00</color>
-
     <!-- Whether to dim the FOD icon -->
     <bool name="config_fodIconDim">false</bool>
 
