@@ -137,10 +137,18 @@ public class FacolaView extends ImageView implements OnTouchListener {
             //mY = 1988;// - 190/2;
             //mW = 190;
             //mH = 190;
-            mX = -1;
-            mY = -1;
-            mW = -1;
-            mH = -1;
+
+            // Lenovo Z6
+            mX = 450;
+            mY = 1910;
+            mW = 180;
+            mH = 180;
+
+            // Default:
+            // mX = -1;
+            // mY = -1;
+            // mW = -1;
+            // mH = -1;
         }
 
         mParamsTouched.dimAmount = 0;
@@ -606,6 +614,8 @@ public class FacolaView extends ImageView implements OnTouchListener {
         try {
             if(mXiaomiFingerprint != null) {
                 mXiaomiFingerprint.extCmd(0xa, 0);
+            } else if(mGoodixFingerprint != null) {
+                mGoodixFingerprint.goodixExtendCommand(10, 0);
             }
         } catch(Exception e) {
             Slog.d("PHH-Enroll", "Failed calling xiaomi fp extcmd");
